@@ -6,26 +6,30 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-
-    class MyLinkedList
+    class MyGenericLinkedList<T>
     {
-        private Node Head = null;
-        public MyLinkedList()
+        private GenericNode<T> Head = null;
+        public MyGenericLinkedList()
         {
             Head = null;
         }
-        public void AddNode()
+        //public void AddNode()
+        //{
+        //    GenericNode<T> aNode = new GenericNode<T>();
+        //    LinkNode(aNode);
+        //}
+        //public void AddNode(GenericNode<T> aNode)
+        //{
+        //    LinkNode(aNode);
+        //}
+        public void AddNode(T data)
         {
-            Node aNode = new Node();
-            LinkNode(aNode);
+            GenericNode<T> anode = new GenericNode<T> (data);
+            LinkNode(anode);
         }
-        public void AddNode(Node aNode)
+        private void LinkNode(GenericNode<T> aNode)
         {
-            LinkNode(aNode);
-        }
-        private void LinkNode(Node aNode)
-        {
-            Node nodePointer;
+            GenericNode<T> nodePointer;
             if (Head == null)
             {
                 Head = aNode; // First time have head point to new item               Head = aNode;
@@ -42,18 +46,19 @@ namespace LinkedList
 
         public void showList()
         {
-            Node nodePointer = Head;
+            GenericNode<T> nodePointer = Head;
 
             do
             {
-                Console.WriteLine(nodePointer.FirstName + " " + nodePointer.LastName);
+                // Console.WriteLine(nodePointer.FirstName + " " + nodePointer.LastName);
+                Console.WriteLine(nodePointer.Data);
                 nodePointer = nodePointer.NextNode;
 
             } while (nodePointer != null);
         }
-        public System.Collections.Generic.IEnumerator<Node> GetEnumerator()
+        public System.Collections.Generic.IEnumerator<GenericNode<T>> GetEnumerator()
         {
-            Node nodePointer = Head;
+            GenericNode<T> nodePointer = Head;
             do
             {
                 yield return nodePointer;
@@ -61,5 +66,5 @@ namespace LinkedList
             } while (nodePointer != null);
 
         }
-    }//END OF CLASS
-}//END OF NAMESPACE
+    }
+}
